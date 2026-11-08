@@ -22,3 +22,17 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Secretos y certificados (nunca subir)
+.env
+.env.*
+*.p12
+*.pfx
+*.pem
+*.key
+
+# Frontend y backend
+node_modules/
+dist/
+build/
+target/
