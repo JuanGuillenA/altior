@@ -29,7 +29,7 @@ jurídica y las integraciones locales (SATJE, SRI, firma electrónica, correo, W
 
 | Capa | Tecnología |
 |---|---|
-| Backend | Java 21, desarrollado en Visual Studio Code, patrón MVC; Spring Boot (propuesto, confirmar) |
+| Backend | Java 17, desarrollado en Visual Studio Code, patrón MVC; Spring Boot (propuesto, confirmar) |
 | Frontend | React con TypeScript; librería de componentes POR DEFINIR (propuesto: componentes ya hechos, no diseño desde cero) |
 | Base de datos | PostgreSQL |
 | Migraciones | POR DEFINIR (propuesto: Flyway) |
@@ -141,7 +141,7 @@ Estado, prioridad y reglas de cada módulo: ver `docs/especificacion/` (una fich
 
 ### Decididas
 - [x] Aplicación web, no de escritorio
-- [x] Backend en Java 21 con patrón MVC, desarrollado en Visual Studio Code
+- [x] Backend en Java 17 con patrón MVC, desarrollado en Visual Studio Code
 - [x] Frontend en React con TypeScript
 - [x] Base de datos PostgreSQL
 - [x] Docker y Docker Compose
