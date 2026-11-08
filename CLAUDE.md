@@ -29,14 +29,14 @@ jurídica y las integraciones locales (SATJE, SRI, firma electrónica, correo, W
 
 | Capa | Tecnología |
 |---|---|
-| Backend | Java 17, desarrollado en Visual Studio Code, patrón MVC; Spring Boot (propuesto, confirmar) |
+| Backend | Java 17, desarrollado en Visual Studio Code, patrón MVC; Spring Boot |
 | Frontend | React con TypeScript; librería de componentes POR DEFINIR (propuesto: componentes ya hechos, no diseño desde cero) |
 | Base de datos | PostgreSQL |
-| Migraciones | POR DEFINIR (propuesto: Flyway) |
+| Migraciones | Flyway (archivos SQL numerados, versionados en Git) |
 | Contenedores | Docker y Docker Compose |
-| Almacenamiento de archivos | POR DEFINIR (propuesto: compatible con S3, separado de la base de datos) |
+| Almacenamiento de archivos | MinIO en Docker (compatible con S3), separado de la base de datos |
 | Control de versiones | Git + GitHub |
-| CI/CD | POR DEFINIR (propuesto: GitHub Actions) |
+| CI/CD | GitHub Actions: CI (compilar y probar en cada subida); despliegue automático para más adelante |
 | Hosting | Servidor de un conocido de Juan; suficiente para el inicio (especificaciones, acceso y respaldos POR DEFINIR) |
 
 ## Estructura del repositorio
@@ -70,8 +70,8 @@ levantar el entorno, correr pruebas del backend, correr pruebas del frontend, co
    van en variables de entorno. Nunca leer ni editar archivos `.env`.
 4. Contraseñas con hash seguro; nunca en texto plano ni en logs.
 5. Validar toda entrada en el servidor; consultas parametrizadas; protección contra XSS y CSRF.
-6. HTTPS, cierre de sesión por inactividad, bloqueo por intentos fallidos. Verificación en dos pasos (incluida).
-7. Los archivos subidos se validan por tipo y tamaño, y se guardan cifrados (detalle POR DEFINIR).
+6. HTTPS, cierre de sesión por inactividad, bloqueo por intentos fallidos. Verificación en dos pasos con app de códigos (TOTP): obligatoria para el administrador del despacho y opcional para los demás.
+7. Los archivos subidos se validan por tipo y tamaño, y se guardan cifrados por el propio sistema antes de escribirlos (cifrado a nivel de aplicación). La clave de cifrado va en una variable de entorno controlada por Juan, nunca en el repositorio ni en el servidor donde están los archivos.
 8. Registro de auditoría: quién vio, creó, editó o borró qué y cuándo.
 9. Respaldos automáticos y restauración probada.
 
@@ -147,18 +147,18 @@ Estado, prioridad y reglas de cada módulo: ver `docs/especificacion/` (una fich
 - [x] Docker y Docker Compose
 - [x] Todo en español (interfaz, documentos, commits y nombres en el código)
 - [x] Sin rol de cliente: solo abogados y su personal
-- [x] Verificación en dos pasos incluida
+- [x] Verificación en dos pasos con app de códigos: obligatoria para el administrador y opcional para los demás
+- [x] Backend con Spring Boot
+- [x] Migraciones con Flyway
+- [x] Archivos en MinIO con Docker
+- [x] CI con GitHub Actions (compilar y correr pruebas en cada subida)
+- [x] Cifrado de archivos a nivel de aplicación, con la clave fuera del servidor
 - [x] Hosting inicial: servidor de un conocido de Juan
 - [x] El código en Python del abogado se audita y se reescribe, no se traduce
 - [x] Forma de trabajo: Juan como ingeniero revisor y Claude Code como desarrollador
 
 ### Pendientes de decidir (técnicas, decide Juan)
-- [ ] Migraciones con Flyway (propuesto)
-- [ ] Archivos en MinIO con Docker, o en una carpeta del servidor al inicio (propuesto)
-- [ ] CI con GitHub Actions: compilar y correr pruebas en cada subida (propuesto)
-- [ ] Cifrado de archivos guardados, con la clave fuera del servidor del conocido (propuesto)
-- [ ] 2FA obligatoria para el administrador y opcional para los demás (propuesto)
-- [ ] Versión de PostgreSQL y framework del backend (Spring Boot propuesto)
+- [ ] Versión de PostgreSQL y de Spring Boot (compatible con Java 17)
 - [ ] Hosting: características del servidor, quién tiene acceso, quién hace los respaldos y cómo se protegen los datos de los clientes
 - [ ] Librería de componentes del frontend
 
